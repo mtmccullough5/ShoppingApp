@@ -1,4 +1,5 @@
-require_relative "app_classes"
+require_relative "shop"
+require_relative "user"
 
 class ShoppingApp # This will run everything
   attr_accessor :user, :store
@@ -15,20 +16,26 @@ class ShoppingApp # This will run everything
   end
   
   def lets_go_shopping
-    puts "What would you like to do?"
-    menu_options = [
-      "Buy Items", 
-      "Sell Items",
-      "Check Wallet",
-    ]
-    (0..menu_options.length-1).each {|x| puts "#{x+1}) #{menu_options[x]}"}
-    case 1 #gets.to_i
-    when 1 # Buy Items
-      @store.store_front # Takes me to the store
-    when 2 # Sell Items
-      # Takes me to owned items
-    when 3 # Check Wallet
-      #Curren Wallet balance
+    shopping = true
+    while shopping
+      puts "What would you like to do?"
+      menu_options = [
+        "Buy Items", 
+        "Sell Items",
+        "Check Wallet",
+        "Quit"
+      ]
+      (0..menu_options.length-1).each {|x| puts "#{x+1}) #{menu_options[x]}"}
+      case gets.to_i
+      when 1 # Buy Items
+        @store.store_front(@user) # Takes me to the store
+      when 2 # Sell Items
+        # Takes me to owned items
+      when 3 # Check Wallet
+        #Curren Wallet balance
+      when 4 # Quit
+        shopping = false
+      end
     end
   end
   
